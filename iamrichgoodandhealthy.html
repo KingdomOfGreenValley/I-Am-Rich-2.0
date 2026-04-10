@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAmRich</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0f0f0f;
+        font-family: Helvetica, Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .app {
+        width: 320px;
+        height: 500px;
+        position: relative;
+        text-align: center;
+    }
+
+    /* Top right Done button (hidden by default) */
+    .topbar {
+        position: absolute;
+        top: 10px;
+        width: 100%;
+        display: none;
+        justify-content: flex-end;
+        padding: 0 10px;
+    }
+
+    .topbar.show {
+        display: flex;
+    }
+
+    .btn {
+        font-size: 14px;
+        color: #4aa3ff;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* Gem */
+    .gem {
+        font-size: 90px;
+        margin-top: 80px;
+        transition: all 0.8s ease;
+        text-shadow: 0 0 15px rgba(120,120,120,0.6);
+    }
+
+    .aura {
+        width: 120px;
+        height: 120px;
+        margin: -95px auto 0 auto;
+        border-radius: 50%;
+        filter: blur(20px);
+        background: rgba(150,150,150,0.25);
+        transition: all 0.8s ease;
+    }
+
+    /* RED state */
+    .active .gem {
+        text-shadow: 0 0 25px rgba(255,0,0,0.9);
+        transform: scale(1.05);
+    }
+
+    .active .aura {
+        background: rgba(255,0,0,0.35);
+    }
+
+    /* Info page (FULL SCREEN) */
+    .info {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f0f0f;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.8;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .info.show {
+        display: flex;
+    }
+
+    /* i button */
+    .infoBtn {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #444;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="app" id="app">
+
+    <!-- Done button -->
+    <div class="topbar" id="topbar">
+        <div class="btn" onclick="backToGem()">Done</div>
+    </div>
+
+    <!-- Gem -->
+    <div class="gem">💎</div>
+    <div class="aura"></div>
+
+    <!-- Info page -->
+    <div class="info" id="info">
+        I am rich<br>
+        I deserv it<br>
+        I am good,<br>
+        healthy &<br>
+        successful
+    </div>
+
+    <!-- i button -->
+    <div class="infoBtn" onclick="showInfo()">i</div>
+
+</div>
+
+<script>
+    let active = false;
+    let infoMode = false;
+
+    // Start gray → auto switch to red after 1.5s
+    window.onload = () => {
+        setTimeout(() => {
+            active = true;
+            document.getElementById("app").classList.add("active");
+        }, 1500);
+    };
+
+    function showInfo() {
+        if (!active) return;
+
+        infoMode = true;
+        document.getElementById("info").classList.add("show");
+        document.getElementById("topbar").classList.add("show");
+    }
+
+    function backToGem() {
+        infoMode = false;
+        document.getElementById("info").classList.remove("show");
+        document.getElementById("topbar").classList.remove("show");
+    }
+</script>
+
+</body>
+</html>
